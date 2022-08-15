@@ -6,7 +6,7 @@ e: /Users/abhisek/IdeaProjects/ReactNativeApp/node_modules/react-native-hint-req
 e: /Users/abhisek/IdeaProjects/ReactNativeApp/node_modules/react-native-hint-request-picker/android/src/main/java/com/reactnativehintrequestpicker/HintRequestPickerModule.kt: (63, 43): Type inference failed. Expected type mismatch: inferred type is Credential? but Credential was expected
 ```
 
-Install this fixed version: 
+Install this fixed version & ignore other installation instructions: 
 
 ```
 yarn add abhisekpadhi/react-native-hint-request-picker
