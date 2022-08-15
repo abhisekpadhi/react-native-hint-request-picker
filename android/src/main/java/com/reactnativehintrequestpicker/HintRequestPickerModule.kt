@@ -49,12 +49,13 @@ class HintRequestPickerModule(private val reactContext: ReactApplicationContext)
     if (requestCode === Constants.PHONE_PICKER_REQUEST) {
       val map = Arguments.createMap()
       if (resultCode === RESULT_OK) {
-        val credential: Credential? = data.getParcelableExtra(Credential.EXTRA_KEY)
-        if (credential == null) {
-          return;
+        val credential = data.getParcelableExtra(Credential.EXTRA_KEY)
+        when (credential == null) {
+          true -> return
+          else -> {
+            map.putString("phoneNumber", credential.id);
+          }
         }
-        val phoneNumber = credential.getId();
-        map.putString("phoneNumber", phoneNumber);
       } else {
         map.putString("phoneNumber", null);
       }
@@ -63,17 +64,19 @@ class HintRequestPickerModule(private val reactContext: ReactApplicationContext)
     else if (requestCode === Constants.EMAIL_PICKER_REQUEST) {
       val map = Arguments.createMap()
       if (resultCode === RESULT_OK) {
-        val credential: Credential? = data.getParcelableExtra(Credential.EXTRA_KEY)
-        if (credential == null) {
-          return;
+        val credential = data.getParcelableExtra(Credential.EXTRA_KEY)
+        when (credential == null)  {
+          true -> return
+          else -> {
+            map.putString("givenName", credential.givenName);
+            map.putString("name", credential.name);
+            map.putString("id", credential.id);
+            map.putString("email", credential.id);
+            map.putString("familyName", credential.familyName);
+            map.putString("profilePictureUri", credential.profilePictureUri.toString());
+            map.putString("accountType", credential.accountType);
+          }
         }
-        map.putString("givenName", credential.givenName);
-        map.putString("name", credential.name);
-        map.putString("id", credential.id);
-        map.putString("email", credential.id);
-        map.putString("familyName", credential.familyName);
-        map.putString("profilePictureUri", credential.profilePictureUri.toString());
-        map.putString("accountType", credential.accountType);
       }
       else {
         map.putString("email", null);
